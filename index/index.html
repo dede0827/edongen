@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <title>이동근 팬사이트</title>
+  <meta charset="utf-8">
+</head>
+
+
+<style>
+.textbox{
+  width: 600px;
+  height: 100px;
+  border: 3px solid black;
+  background-color: white;
+  margin:40px auto;
+  padding: 10px 50px 30px;
+  text-align: center;
+
+
+
+}
+
+body{
+  background-image:url("ralro.jpg")
+}
+.olbox{
+  width:550px;
+  height:500px;
+  border:5px solid black;
+  background-color: white;
+  margin: 70px auto;
+  padding: 10px;
+
+}
+.버튼{
+  margin: 50px 30px 20px 70px;
+  padding: 10px;
+  width: 400px;
+  font-size: 30px;
+  color: #333;
+  background: #eed0dc;
+  border: 1px solid #ffe3ed;
+  border-radius: 15px;
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+
+</style>
+
+
+<body>
+  <p style="margin-top:100px;">
+    <div class="textbox"> <h1>☆어서오세요 이동근 팬사이트입니다☆</h1> </div>
+  </p>
+
+  <p style="margin-top:300px;">
+    <div class="olbox">
+      <input class="버튼" type="button" onclick="tmi()" value="이동근 프로필 "><br><br>
+      <input class="버튼" type="button" onclick="pictures()" value="이동근 사진"><br><br>
+      <input class="버튼" type="button" onclick="quiz_dong()" value="이동근 상식퀴즈"><br><br>
+    </div>
+  </p>
+  <script>
+  function tmi(){
+    window.location.href="../tmi/TMI.html"
+  }
+  function pictures(){
+    window.location.href="../picture/picture.html"
+  }
+  function quiz_dong(){
+    window.location.href="../quiz/quiz.html"
+  }
+  </script>
+</body>
+</html>

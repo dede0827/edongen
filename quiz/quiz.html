@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+
+</style>
+<body>
+  <div class="grid">
+    <h1>이동근 상식 퀴즈</h1>
+    <div id="quiz">
+      <p id="question"></p>
+
+      <div class="buttons">
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+      </div>
+      <footer>
+        <p id="progress">진행 정보</p>
+      </footer>
+      <input class="버튼" type="button" onclick="newpage()" value="뒤로가기 ">
+    </div>
+  </div>
+  <script>
+  function newpage(){
+    window.location.href="../index/index.html"
+  }
+  function Question(text, choice, answer) {
+    this.text = text;
+    this.choice = choice;
+    this.answer = answer;
+  }
+
+
+  function Quiz(questions) {
+    this.score = 0;
+    this.questions = questions;
+    this.questionIndex = 0;
+  }
+
+
+  Quiz.prototype.correctAnswer = function (answer) {
+    return answer == this.questions[this.questionIndex].answer;
+  };
+
+  var questions = [
+    new Question(
+      '다음 중 이동근이 제일 못하는 것은??',
+      ['밥 먹기', '남탓하기', '찡찡대기', '원딜하기'],
+      '원딜하기'
+    ),
+    new Question(
+      '다음 중 이동근의 몸무게로 알맞는 것은?',
+      ['85kg','70kg', '102kg', '63kg'],
+      '85kg'
+    ),
+    new Question(
+      '다음 중 이동근이 보지 않은 애니는?',
+      ['나루토', '에반게리온','귀멸의 칼날', '주술회전'],
+      '에반게리온'
+    ),
+    new Question(
+      '다음 중 이동근이 좋아하는 노래는?',
+      ['이무진-신호등', '이무진-비와 당신', '아이유-팔레트', '하이큐-imagenation'],
+      '하이큐-imagenation'
+    ),
+    new Question(
+      '다음 중 이동근이 좋아하는 게임은?',
+      ['롤', '배그', '아이돌마스터 시리즈', '오버워치'],
+      '아이돌마스터 시리즈'
+    ),
+    new Question(
+      '다음 중 가장 화가나는 동근이의 행동은?',
+      ['서폿 탓 하는 이동근', '롤 채팅치는 이동근', '피파에서 좋은 카드 뽑은 이동근', '애니 보는 이동근'],
+      '롤 채팅치는 이동근'
+    ),
+
+
+  ];
+
+
+  var quiz = new Quiz(questions);
+
+
+  function updateQuiz() {
+    var question = document.getElementById('question');
+    var idx = quiz.questionIndex + 1;
+    var choice = document.querySelectorAll('.btn');
+
+
+    question.innerHTML = '문제' + idx + ') '+quiz.questions[quiz.questionIndex].text;
+
+
+    for (var i = 0; i < 4; i++) {
+      choice[i].innerHTML = quiz.questions[quiz.questionIndex].choice[i];
+    }
+
+    progress();
+  }
+
+  function progress() {
+    var progress = document.getElementById('progress');
+    progress.innerHTML =
+    '문제 ' + (quiz.questionIndex + 1) + '/ ' + quiz.questions.length;
+  }
+
+  var btn = document.querySelectorAll('.btn');
+
+
+  function checkAnswer(i) {
+    btn[i].addEventListener('click', function () {
+      var answer = btn[i].innerText;
+
+      if (quiz.correctAnswer(answer)) {
+        alert('정답입니다!');
+        quiz.score++;
+      } else {
+        alert('틀렸습니다!');
+      }
+
+      if (quiz.questionIndex < quiz.questions.length - 1) {
+        quiz.questionIndex++;
+        updateQuiz();
+      } else {
+        result();
+      }
+    });
+  }
+
+  function result() {
+    var quizDiv = document.getElementById('quiz');
+    var per = parseInt((quiz.score * 100) / quiz.questions.length);
+    var txt =
+    '<h1>결과</h1>' +
+    '<h2 id="score">당신의 점수: ' +
+    quiz.score +
+    '/' +
+    quiz.questions.length +
+    '<br><br>' +
+    per +
+    '점' +
+    '</h2>';
+
+    quizDiv.innerHTML = txt;
+
+
+    if (per < 60) {
+      txt += '<h2>동근씨를 알아가는 사이네요</h2>';
+      quizDiv.innerHTML = txt;
+    } else if (per >= 60 && per < 80) {
+      txt += '<h2>동근씨와 아는 사이네요</h2>';
+      quizDiv.innerHTML = txt;
+    } else if (per >= 80) {
+      txt += '<h2>동근씨와 깐부네요</h2>';
+      quizDiv.innerHTML = txt;
+    }
+  }
+
+  for (var i = 0; i < btn.length; i++) {
+    checkAnswer(i);
+  }
+
+  updateQuiz();
+  </script>
+</body>
+</html>
